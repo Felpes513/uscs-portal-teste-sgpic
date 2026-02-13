@@ -2,8 +2,8 @@ class SecretariaProjetosPage {
   escapeRegex(text) {
     return String(text).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
+
   elements = {
-    // ===== LISTA =====
     btnAdicionarProjetoTopo: () =>
       cy.get("button.btn-add").contains(/Adicionar Projeto/i),
 
@@ -15,12 +15,14 @@ class SecretariaProjetosPage {
     inputBuscar: () =>
       cy.get('input.search-input[placeholder*="Buscar por projeto"]'),
 
-    // filtros
     filtroTodos: () => cy.get(".filter-buttons button").contains(/^Todos$/i),
+
     filtroEmExecucao: () =>
       cy.get(".filter-buttons button").contains(/Em execução/i),
+
     filtroConcluidos: () =>
       cy.get(".filter-buttons button").contains(/Concluídos/i),
+
     filtroCancelados: () =>
       cy.get(".filter-buttons button").contains(/Cancelados/i),
 
@@ -29,7 +31,6 @@ class SecretariaProjetosPage {
     btnPaginaPrev: () => cy.get(".pagination .page-btn").first(),
     btnPaginaNext: () => cy.get(".pagination .page-btn").last(),
 
-    // ===== FORMULÁRIO =====
     inputCodProjeto: () => cy.get('input[name="cod_projeto"]'),
     inputTitulo: () => cy.get('input[name="titulo_projeto"]'),
     textareaResumo: () => cy.get('textarea[name="resumo"]'),
@@ -67,6 +68,7 @@ class SecretariaProjetosPage {
     inputPdfIdeia: () => cy.get('input#pdfIdeia[type="file"][accept=".pdf"]'),
 
     btnCadastrarProjeto: () => cy.contains("button", /Cadastrar Projeto/i),
+
     btnCancelar: () => cy.contains("button", /Cancelar/i),
   };
 
@@ -122,7 +124,6 @@ class SecretariaProjetosPage {
     this.elements.btnPaginaNext().should("not.be.disabled");
   }
 
-  // FORMULÁRIO
   assertNaTelaNovoProjeto() {
     cy.location("pathname").should("include", "/secretaria/projetos/novo");
     this.elements.inputTitulo().should("be.visible");
@@ -168,6 +169,7 @@ class SecretariaProjetosPage {
       .invoke("val")
       .should("not.be.empty");
   }
+
   openCampus() {
     this.elements.selectCampus().should("be.visible").click();
   }

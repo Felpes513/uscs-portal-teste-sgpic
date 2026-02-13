@@ -1,6 +1,5 @@
 class RegistrationPage {
   elements = {
-    // Alunos
     btnCriarConta: () => cy.contains("button", /Criar Conta/i),
     btnSouAluno: () => cy.contains("button", /Sou Aluno/i),
     btnSouOrientador: () => cy.contains("button", /Sou Orientador/i),
@@ -28,6 +27,7 @@ class RegistrationPage {
 
     alunoTrabalhaSimLabel: () =>
       cy.contains("label.radio", /Possui trabalho remunerado/i),
+
     alunoTrabalhaNaoLabel: () => cy.contains("label.radio", /^Não possui$/i),
 
     checkboxTermosFinal: () =>
@@ -35,15 +35,10 @@ class RegistrationPage {
 
     btnCadastrar: () => cy.contains("button.cta", /Cadastrar/i),
 
-    // Orientador
     inputOriNome: () => cy.get('input[name="ori_nome"]'),
-
     inputOriCpf: () => cy.get('input[name="ori_cpf"]'),
-
     inputOriEmail: () => cy.get('input[name="ori_email"]'),
-
     inputOriSenha: () => cy.get('input[name="ori_senha"]'),
-
     inputOriConfirmarSenha: () => cy.get('input[name="ori_confirma"]'),
 
     checkboxTermosOri: () => cy.get('input[type="checkbox"][name="termsOri"]'),
