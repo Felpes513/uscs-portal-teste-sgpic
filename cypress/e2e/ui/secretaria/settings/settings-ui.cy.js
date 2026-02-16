@@ -172,11 +172,11 @@ describe("Secretaria - Configurações (Campus)", () => {
     page.senhaSecretaria("123456");
     page.confirmarSenhaSecretaria("123456");
     cy.intercept("POST", /\/api\/secretarias\/?$/).as("postSecretarias");
-    cy.intercept("GET", /\/api\/secretarias(\/.*)?$/).as("getSecretarias"); // se precisar
+    cy.intercept("GET", /\/api\/secretarias(\/.*)?$/).as("getSecretarias");
 
     page.clickSalvarSecretaria();
     cy.wait("@postSecretarias");
-    page.clickOkModalSucesso(); // seu OK do modal "Sucesso"
+    page.clickOkModalSucesso(); 
   });
 
   it("Cenário - Resetar senha de secretária", () => {

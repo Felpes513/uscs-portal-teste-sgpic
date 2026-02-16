@@ -30,7 +30,6 @@ export const loginSecretariaUi = ({ email, senha } = {}) => {
   );
 };
 
-// ✅ ADICIONAR (ORIENTADOR)
 export const loginOrientadorUi = ({ email, senha } = {}) => {
   const page = new OrientadorLoginPage();
 
@@ -53,11 +52,9 @@ export const loginOrientadorUi = ({ email, senha } = {}) => {
   page.setSenha(finalSenha);
   page.clickEntrar();
 
-  // ✅ valida que saiu do /login
   cy.location("pathname", { timeout: 10000 }).should("not.include", "/login");
 };
 
-// ✅ ADICIONAR (ALUNO)
 export const loginAlunoUi = ({ email, senha } = {}) => {
   const page = new AlunoLoginPage();
 
@@ -78,6 +75,5 @@ export const loginAlunoUi = ({ email, senha } = {}) => {
   page.setSenha(finalSenha);
   page.clickEntrar();
 
-  // ✅ valida que saiu do /login
   cy.location("pathname", { timeout: 10000 }).should("not.include", "/login");
 };

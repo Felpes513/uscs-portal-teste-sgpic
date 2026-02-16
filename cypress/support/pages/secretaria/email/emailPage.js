@@ -1,30 +1,25 @@
 class SecretariaEmailPage {
   elements = {
-    // ===== MENU / ROTA =====
     menuCertificados: () =>
       cy.contains('a[routerlink="/secretaria/email"]', /Certificados/i),
 
     urlPath: "/secretaria/email",
 
-    // ===== DOWNLOAD EXEMPLO EXCEL =====
     btnBaixarExemploExcel: () =>
       cy
         .get('a[href="/api/relatorios/exportar-exemplo-excel"]')
         .filter(":visible")
         .first(),
 
-    // ===== DOWNLOAD RELATÓRIO ALUNOS =====
     btnBaixarRelatorioAlunos: () =>
       cy
         .get('a[href="/api/relatorios/relatorio-alunos"]')
         .filter(":visible")
         .first(),
 
-    // ===== DOWNLOAD WORKSHOP =====
     btnBaixarWorkshop: () =>
       cy.get('a[href="/api/relatorios/workshop"]').filter(":visible").first(),
 
-    // ===== UPLOAD / AÇÕES =====
     inputFilePlanilha: () =>
       cy
         .get('input[type="file"].file-input')
@@ -41,7 +36,6 @@ class SecretariaEmailPage {
       cy.contains("button.btn.btn-outline", /^\s*Limpar\s*$/i).first(),
   };
 
-  // ===== NAVEGAÇÃO =====
   visitMenu() {
     this.elements.menuCertificados().should("be.visible").click();
     cy.location("pathname").should("eq", this.elements.urlPath);
@@ -54,7 +48,6 @@ class SecretariaEmailPage {
     cy.window().then((win) => win.scrollTo(0, 0));
   }
 
-  // ===== AÇÕES =====
   clickBaixarExemploExcel() {
     this.elements
       .btnBaixarExemploExcel()

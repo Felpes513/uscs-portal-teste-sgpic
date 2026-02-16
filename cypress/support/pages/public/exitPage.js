@@ -1,9 +1,7 @@
-// cypress/support/pages/public/exitPage.js
 class ExitPage {
   elements = {
     sidenav: () => cy.get("#sidenav-nav").should("be.visible"),
 
-    // pega qualquer <a> dentro do sidenav que tenha o texto "Sair"
     btnSair: () =>
       cy
         .get("#sidenav-nav")

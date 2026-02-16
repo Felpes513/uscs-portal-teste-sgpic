@@ -5,8 +5,6 @@ describe("Public - Sair (Logout)", () => {
 
   it("Cenário 1 - Logout Secretaria", () => {
     cy.loginSecretariaUi();
-
-    // garante que está em área logada antes do logout
     cy.location("pathname", { timeout: 10000 }).should(
       "include",
       "/secretaria/",

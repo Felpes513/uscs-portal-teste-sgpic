@@ -1,66 +1,56 @@
 import { loginAlunoUi } from "../../../support/helpers/login";
 import StudentPage from "../../../support/pages/student/studentPage";
 
-describe("UI - Fluxos do Aluno (Detalhe do Projeto)", () => {
+describe("UI - Fluxos do Aluno", () => {
   const page = new StudentPage();
 
   beforeEach(() => {
     loginAlunoUi();
-    page.assertOnListagemProjetos();
-    page.openFirstProjeto();
-    page.assertOnProjetoDetalhe();
   });
 
-  it("Deve ser apenas visualização (sem edição) e permitir downloads conforme status", () => {
-    page.assertReadOnlyForm();
+  it("Deve realizar todos os downloads (PDF e DOCX) das 3 fases", () => {
+    page.assertOnListagemProjetos();
 
-    // rola até a seção de histórico / final
-    page.scrollToBottom();
+    page.openFirstProjeto();
+    page.assertOnProjetoDetalhe();
+    page.scrollContainerToTop();
 
-    // FASE 1 - Submissão (Ideia) => no seu exemplo está Enviado (habilitado)
-    page.handleDownload({
+    page.downloadByFase({
       faseTitulo: "Submissão do Projeto (Ideia)",
       tipo: "PDF",
-      enabled: true,
-      click: true,
     });
-
-    page.handleDownload({
+    page.downloadByFase({
       faseTitulo: "Submissão do Projeto (Ideia)",
       tipo: "DOCX",
-      enabled: true,
-      click: true,
     });
 
-    // FASE 2 - Monografia Parcial => no seu exemplo "Não enviado" (disabled)
-    page.handleDownload({
-      faseTitulo: "Monografia Parcial",
-      tipo: "PDF",
-      enabled: false,
-    });
+    page.downloadByFase({ faseTitulo: "Monografia Parcial", tipo: "PDF" });
+    page.downloadByFase({ faseTitulo: "Monografia Parcial", tipo: "DOCX" });
 
-    page.handleDownload({
-      faseTitulo: "Monografia Parcial",
-      tipo: "DOCX",
-      enabled: false,
-    });
-
-    // FASE 3 - Monografia Final => no seu exemplo "Não enviado" (disabled)
-    page.handleDownload({
-      faseTitulo: "Monografia Final",
-      tipo: "PDF",
-      enabled: false,
-    });
-
-    page.handleDownload({
-      faseTitulo: "Monografia Final",
-      tipo: "DOCX",
-      enabled: false,
-    });
+    page.downloadByFase({ faseTitulo: "Monografia Final", tipo: "PDF" });
+    page.downloadByFase({ faseTitulo: "Monografia Final", tipo: "DOCX" });
   });
 
   it('Deve voltar para a listagem ao clicar em "Voltar"', () => {
+    page.assertOnListagemProjetos();
+
+    page.openFirstProjeto();
+    page.assertOnProjetoDetalhe();
+    page.scrollContainerToTop();
+
     page.scrollToBottom();
     page.clickVoltar();
+
+    page.assertOnListagemProjetos();
+  });
+
+  it('Ao clicar "Cancelar" na confirmação, NÃO deve inscrever nem disparar requisição', () => {
+    page.assertOnListagemProjetos();
+    page.inscreverNoPrimeiroProjetoDaListagem_Cancelar();
+  });
+
+  it('Ao clicar "OK" na confirmação, deve inscrever e trocar botão para "Inscrito"', () => {
+    page.assertOnListagemProjetos();
+    page.inscreverNoPrimeiroProjetoDaListagem_OK();
   });
 });

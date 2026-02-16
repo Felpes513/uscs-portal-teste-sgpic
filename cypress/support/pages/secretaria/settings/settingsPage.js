@@ -137,7 +137,6 @@ class SecretariaConfiguracoesPage {
         .filter(":visible")
         .first(),
 
-    // Form cadastro secretaria
     inputSecNome: () =>
       cy.get('input[name="sec_nome"]').filter(":visible").last(),
     inputSecEmail: () =>
@@ -152,7 +151,6 @@ class SecretariaConfiguracoesPage {
     btnSalvarSecretaria: () =>
       cy.get('form.sec-form button[type="submit"]').filter(":visible").last(),
 
-    // Tabela listagem
     tabelaSecretarias: () =>
       cy.get("table.table-secretarias").filter(":visible").first(),
 
@@ -171,7 +169,6 @@ class SecretariaConfiguracoesPage {
         .filter(":visible")
         .first(),
 
-    // ===== ABA SECRETARIAS =====
     abaSecretarias: () =>
       cy
         .contains(
@@ -202,14 +199,12 @@ class SecretariaConfiguracoesPage {
         .filter(":visible")
         .last(),
 
-    // elements (adicione)
     btnOkModalSucesso: () =>
       cy
         .contains("button.btn.btn-primary", /^\s*OK\s*$/i)
         .filter(":visible")
         .last(),
 
-    // ===== TABELA SECRETARIAS =====
     tabelaSecretarias: () =>
       cy.get("table.table-secretarias").filter(":visible").first(),
 
@@ -228,8 +223,6 @@ class SecretariaConfiguracoesPage {
         .find("button.btn-reset")
         .filter(":visible"),
 
-    // ===== DIALOGS (RESET/SUCESSO/CADASTRO) =====
-    // 1º modal (Reset): tem Cancelar e OK
     dialogActions: () => cy.get("div.dialog-actions").filter(":visible"),
 
     btnDialogOkDentroActions: () =>
@@ -244,7 +237,6 @@ class SecretariaConfiguracoesPage {
         .filter(":visible")
         .last(),
 
-    // 2º modal (Sucesso / Cadastro sucesso): só tem OK
     btnDialogOkUnico: () =>
       cy
         .contains("button.btn.btn-primary", /^\s*OK\s*$/i)
@@ -565,7 +557,6 @@ class SecretariaConfiguracoesPage {
       .click();
   }
 
-  // methods (adicione)
   clickOkModalSucesso() {
     this.elements
       .btnOkModalSucesso()
@@ -573,7 +564,6 @@ class SecretariaConfiguracoesPage {
       .and("not.be.disabled")
       .click();
 
-    // garante que fechou
     cy.contains("button.btn.btn-primary", /^\s*OK\s*$/i)
       .filter(":visible")
       .should("have.length", 0);
@@ -586,13 +576,11 @@ class SecretariaConfiguracoesPage {
       .and("not.be.disabled")
       .click();
 
-    // garante que não ficou nenhum OK visível travando a tela
     cy.contains("button.btn.btn-primary", /^\s*OK\s*$/i)
       .filter(":visible")
       .should("have.length", 0);
   }
 
-  // reset senha por email: clica no botão da tabela, confirma OK, depois OK do sucesso
   resetarSenhaSecretariaPorEmail(email) {
     this.elements
       .btnResetarSenhaByEmail(email)
@@ -600,7 +588,6 @@ class SecretariaConfiguracoesPage {
       .and("not.be.disabled")
       .click();
 
-    // 1º modal: Cancelar/OK
     this.elements.dialogActions().should("be.visible");
     this.elements
       .btnDialogOkDentroActions()
@@ -608,7 +595,6 @@ class SecretariaConfiguracoesPage {
       .and("not.be.disabled")
       .click();
 
-    // 2º modal: sucesso -> OK
     cy.contains(/Sucesso/i, { timeout: 10000 }).should("be.visible");
     this.clickOkModalSucesso();
   }

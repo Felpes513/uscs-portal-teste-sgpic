@@ -1,4 +1,3 @@
-// D:\Projetos\Vs code\uscs-portal-teste-sgpic\cypress\e2e\ui\secretaria\email\email-ui.cy.js
 import SecretariaEmailPage from "../../../../support/pages/secretaria/email/emailPage";
 
 describe("Secretaria - Certificados (E-mail)", () => {
@@ -10,7 +9,6 @@ describe("Secretaria - Certificados (E-mail)", () => {
   });
 
   it("Cenário 1 - Fazer download de exemplo de importação", () => {
-    // limpa downloads pra garantir que é download novo (Windows)
     cy.exec('del /q "cypress\\downloads\\exemplo_importacao.xlsx"', {
       failOnNonZeroExit: false,
     });
@@ -23,7 +21,6 @@ describe("Secretaria - Certificados (E-mail)", () => {
 
     cy.wait("@downloadExemplo").its("response.statusCode").should("eq", 200);
 
-    // valida que o arquivo existe
     cy.readFile("cypress/downloads/exemplo_importacao.xlsx", {
       timeout: 20000,
       log: true,
@@ -50,7 +47,6 @@ describe("Secretaria - Certificados (E-mail)", () => {
   });
 
   it("Cenário 3 - Fazer download de relatório de workshop", () => {
-    // o arquivo baixado que você mostrou é: relatorio_workshop.xlsx
     cy.exec('del /q "cypress\\downloads\\relatorio_workshop.xlsx"', {
       failOnNonZeroExit: false,
     });
@@ -72,13 +68,11 @@ describe("Secretaria - Certificados (E-mail)", () => {
 
     page.attachPlanilha(arquivo);
 
-    // após anexar, os botões devem habilitar
     page.elements.btnEnviarEmails().should("not.be.disabled");
     page.elements.btnLimpar().should("not.be.disabled");
 
     page.clickLimpar();
 
-    // após limpar, volta a desabilitar
     page.elements.btnEnviarEmails().should("be.disabled");
     page.elements.btnLimpar().should("be.disabled");
   });
@@ -90,7 +84,6 @@ describe("Secretaria - Certificados (E-mail)", () => {
 
     page.attachPlanilha(arquivo);
 
-    // garante que habilitou antes de clicar
     page.elements.btnEnviarEmails().should("not.be.disabled");
 
     page.clickEnviarEmails();

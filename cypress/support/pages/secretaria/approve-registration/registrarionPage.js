@@ -1,17 +1,14 @@
-// D:\Projetos\Vs code\uscs-portal-teste-sgpic\cypress\support\pages\secretaria\cadastros\cadastrosPage.js
-
 class SecretariaCadastrosPage {
   escapeRegex(text) {
     return String(text).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
 
   elements = {
-    // ===== MENU / ROTA =====
     menuCadastros: () =>
       cy.contains('a[routerlink="/secretaria/cadastros"]', /Cadastros/i),
+
     urlPath: "/secretaria/cadastros",
 
-    // ===== TABS / SUBTABS =====
     tabAprovacoes: () =>
       cy
         .contains("header.tabs button.tab", /^\s*Aprovações\s*$/i)
@@ -36,14 +33,12 @@ class SecretariaCadastrosPage {
         .filter(":visible")
         .first(),
 
-    // ===== FILTRO =====
     inputFiltro: () =>
       cy
         .get('header.tabs .toolbar .search input[placeholder*="filtrar"]')
         .filter(":visible")
         .first(),
 
-    // ===== TABELA =====
     tabela: () => cy.get("table.table").filter(":visible").first(),
 
     rowByEmail: (email) => {
@@ -55,7 +50,6 @@ class SecretariaCadastrosPage {
         .closest("tr");
     },
 
-    // Botões dentro da linha
     btnInadimplentarInRow: () =>
       cy
         .contains("button.btn.btn-inad", /^\s*Inadimplentar\s*$/i)
@@ -86,8 +80,8 @@ class SecretariaCadastrosPage {
         .filter(":visible")
         .last(),
 
-    // ====== TABELAS INADIMPLENTES ======
     tabelaInadAlunos: () => cy.get("table.inad-table").filter(":visible").eq(0),
+
     tabelaInadOrientadores: () =>
       cy.get("table.inad-table").filter(":visible").eq(1),
 
@@ -99,7 +93,6 @@ class SecretariaCadastrosPage {
         .find("button.btn.btn-approve"),
   };
 
-  // ===== NAVEGAÇÃO =====
   visitMenu() {
     this.elements.menuCadastros().should("be.visible").click();
     cy.location("pathname").should("eq", this.elements.urlPath);
@@ -112,13 +105,13 @@ class SecretariaCadastrosPage {
     cy.window().then((win) => win.scrollTo(0, 0));
   }
 
-  // ===== TABS =====
   clickTabAprovacoes() {
     this.elements.tabAprovacoes().should("be.visible").click();
   }
 
   clickTabInadimplentes() {
     this.elements.tabInadimplentes().should("be.visible").click();
+    this.elements.tabInadimplentes().should("have.class", "active");
   }
 
   clickSubtabAlunos() {
@@ -129,12 +122,10 @@ class SecretariaCadastrosPage {
     this.elements.subtabOrientadores().should("be.visible").click();
   }
 
-  // ===== FILTRO =====
   setFiltro(valor) {
     this.elements.inputFiltro().should("be.visible").clear().type(valor);
   }
 
-  // ===== AÇÕES NA LINHA =====
   clickInadimplentarPorEmail(email) {
     this.elements
       .rowByEmail(email)
@@ -169,7 +160,6 @@ class SecretariaCadastrosPage {
       .and("not.be.disabled")
       .click();
 
-    // ✅ valida desapareceu sem quebrar
     this.elements.dialogAcoesNoBody().should("have.length", 0);
   }
 
@@ -181,13 +171,7 @@ class SecretariaCadastrosPage {
       .and("not.be.disabled")
       .click();
 
-    // ✅ valida desapareceu sem quebrar
     this.elements.dialogAcoesNoBody().should("have.length", 0);
-  }
-
-  clickTabInadimplentes() {
-    this.elements.tabInadimplentes().should("be.visible").click();
-    this.elements.tabInadimplentes().should("have.class", "active");
   }
 
   clickAdimplentarAlunoPorEmail(email) {
