@@ -2,46 +2,94 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# SGPIC - Documentação de Testes Automatizados
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Bem-vindo à documentação dos testes automatizados do **SGPIC (Sistema de Gerenciamento de Projetos de Iniciação Científica)** da **USCS (Universidade São Caetano do Sul)**.
 
-## Getting Started
+## 📋 Sobre Este Projeto
 
-Get started by **creating a new site**.
+Este projeto contém uma suite completa de testes automatizados desenvolvidos em **Cypress** para validar a funcionalidade do sistema SGPIC. Os testes cobrem:
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+- ✅ **Autenticação e Login** de três perfis institucionais
+- ✅ **Registro e Cadastro** de alunos e orientadores
+- ✅ **Gerenciamento de Projetos** de iniciação científica
+- ✅ **Avaliadores Externos** e envio de avaliações
+- ✅ **Configurações Administrativas** da secretaria
+- ✅ **Certificados e E-mails** em lote
+- ✅ **Aprovação de Cadastros** de usuários
+- ✅ **Logout** e saída do sistema
 
-### What you'll need
+## 🎯 Estrutura da Documentação
 
-- [Node.js](https://nodejs.org/en/download/) version 20.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+A documentação está organizada por módulos de funcionalidade:
 
-## Generate a new site
+### 📁 **Login**
+Validação de autenticação para os três perfis:
+- Aluno
+- Orientador
+- Secretaria
 
-Generate a new Docusaurus site using the **classic template**.
+### 📁 **Registro**
+Processo de cadastro de novos usuários (aluno e orientador) com validação de dados obrigatórios.
 
-The classic template will automatically be added to your project after you run the command:
+### 📁 **Secretaria**
+Funcionalidades administrativas:
+- **Avaliadores Externos** - Cadastro e gerenciamento de avaliadores
+- **Projetos** - Criação e filtro de projetos
+- **Configurações** - Campus, cursos, bolsas e usuários secretários
+- **Certificados (E-mail)** - Download de relatórios e envio em lote
+- **Cadastros** - Aprovação e gerenciamento de adimplência
 
-```bash
-npm init docusaurus@latest my-website classic
+### 📁 **Público**
+- **Logout** - Validação de saída do sistema para todos os perfis
+
+## 🚀 Como Usar Esta Documentação
+
+1. **Navegue pelas categorias** no menu lateral esquerdo
+2. **Acesse cada cenário** para entender:
+   - A descrição da funcionalidade
+   - Os passos em formato BDD (Dado, Quando, Então)
+   - O resultado esperado do teste
+3. **Use como referência** para implementar e manter testes
+
+## 🛠️ Tecnologias Utilizadas
+
+- **Cypress** - Framework de testes end-to-end
+- **JavaScript/Node.js** - Linguagem de desenvolvimento
+- **Docusaurus** - Plataforma de documentação
+- **BDD (Behavior-Driven Development)** - Padrão de documentação
+
+## 📝 Padrão de Documentação
+
+Todos os cenários de teste são documentados em formato **BDD**:
+
+```
+- **Dado** que [precondição/estado inicial]
+- **Quando** que [ação do usuário/trigger]
+- **Então** que [resultado esperado/assertions]
 ```
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+Este padrão garante clareza, rastreabilidade e facilita a comunicação entre desenvolvedores e stakeholders.
 
-The command also installs all necessary dependencies you need to run Docusaurus.
+## 📊 Atualização Automática
 
-## Start your site
-
-Run the development server:
+A documentação é **automaticamente gerada** a partir dos testes Cypress. Sempre que novos testes são adicionados ou modificados, execute:
 
 ```bash
-cd my-website
-npm run start
+GERAR DOCUMENTAÇÃO
 ```
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+Este comando varre todos os arquivos em `cypress/e2e/` e atualiza os arquivos correspondentes em `doc-sgpic/docs/`.
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
+## ✨ Contribuindo
 
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+Para adicionar ou modificar testes:
+
+1. Crie ou edite um arquivo em `cypress/e2e/`
+2. Siga o padrão de nomeação: `[modulo]-[funcionalidade].cy.js`
+3. Escreva os testes com nomes descritivos
+4. Execute `GERAR DOCUMENTAÇÃO` para atualizar a documentação
+
+## 📞 Suporte
+
+Para dúvidas ou sugestões sobre os testes, consulte a documentação específica de cada módulo ou entre em contato com a equipe de QA.
